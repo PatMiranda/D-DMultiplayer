@@ -1,0 +1,147 @@
+#myVideo {
+    z-index: -1;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+.logo {
+    height: 100px;
+    align-content: center;
+    border-style: solid;
+    border-width: 4px;
+    border-color: white;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Metamorphous', cursive;
+    background-color: black;
+    color: whitesmoke;
+    font-size: 75px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white;
+}
+.warImage {
+    width: 200px;
+}
+label {
+    font-size: 20px;
+    font-family: 'Metamorphous', cursive;
+    color: whitesmoke;
+}
+h2 {
+    text-align: center;
+    font-family: 'Metamorphous', cursive;
+    color: whitesmoke;
+    font-size: 35px;
+}
+#setPlayerName1 {
+    font-family: 'Metamorphous', cursive;
+    color: lightgreen;
+    font-size: 20px;
+
+}
+#setPlayerName2 {
+    font-family: 'Metamorphous', cursive;
+    color: red;
+    font-size: 20px;
+
+}
+.fighters1 {
+    border-style: solid;
+    border-width: 5px;
+    border-color: green;
+    background-color: black;
+}
+.fighters2 {
+    border-style: solid;
+    border-width: 5px;
+    border-color: green;
+    background-color: black;
+}
+.fighters3 {
+    border-style: solid;
+    border-width: 5px;
+    border-color: red;
+    background-color: black;
+}
+.fighters4 {
+    border-style: solid;
+    border-width: 2px;
+    border-color: red;
+    background-color: black;
+}
+#assigned-name1 {
+    font-size: 20px;
+    color: green;
+    font-family: 'Metamorphous', cursive;
+}
+#assigned-name2 {
+    font-size: 20px;
+    color: green;
+    font-family: 'Metamorphous', cursive;
+}
+#assigned-name3 {
+    font-size: 20px;
+    color: red;
+    font-family: 'Metamorphous', cursive;
+}
+#assigned-name4 {
+    font-size: 20px;
+    color: red;
+    font-family: 'Metamorphous', cursive;
+}
+p {
+    font-size: 20px;
+    color: white;
+    font-family: 'Metamorphous', cursive;
+    background-color: black;
+}
+.cardText {
+    line-break: strict;
+    font-size: 10px;
+    color: white;
+    font-family: 'Metamorphous', cursive;
+    
+}
+.cardImage {
+    width: 200px;
+}
+.card {
+    background-image: url("Images/leather.jpg")
+}
+.weapon1 {
+    font-size: 10px;
+    font-family: 'Metamorphous', cursive;
+
+}
+.weapon1 {
+    font-size: 10px;
+    font-family: 'Metamorphous', cursive;
+
+}
+.weapon2 {
+    font-size: 10px;
+    font-family: 'Metamorphous', cursive;
+
+}
+h3 {
+    font-size: 30px;
+    font-family: 'Metamorphous', cursive;
+    color: green;
+
+}
+.winnerText {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Metamorphous', cursive;
+}
+#playerGreen {
+    color: green;
+}
+#playerRed {
+    color: red;
+}
