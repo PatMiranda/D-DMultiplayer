@@ -145,3 +145,21 @@ h3 {
 #playerRed {
     color: red;
 }
+#chat-area {
+    color: whitesmoke;
+    font-family: 'Metamorphous', cursive;
+    font-size: 15px;
+}
+.chatLabel {
+    color: whitesmoke;
+    font-family: 'Metamorphous', cursive;
+    font-size: 25px;
+}
+#chat-send {
+    font-family: 'Metamorphous', cursive;
+  
+}
+#chatDisplay {
+    font-family: 'Metamorphous', cursive;
+
+}

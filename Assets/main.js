@@ -21,17 +21,17 @@ myAudio.onpause = function() {
   isPlaying = false;
 };
 
-// var config = {
-//     apiKey: "AIzaSyBKux44hLQ1eyQ4BUcCQiZsXfEm-NiMIJ0",
-//     authDomain: "dandd-c6b41.firebaseapp.com",
-//     databaseURL: "https://dandd-c6b41.firebaseio.com",
-//     projectId: "dandd-c6b41",
-//     storageBucket: "",
-//     messagingSenderId: "492662587984"
-//   };
-//   firebase.initializeApp(config);
+var config = {
+    apiKey: "AIzaSyBKux44hLQ1eyQ4BUcCQiZsXfEm-NiMIJ0",
+    authDomain: "dandd-c6b41.firebaseapp.com",
+    databaseURL: "https://dandd-c6b41.firebaseio.com",
+    projectId: "dandd-c6b41",
+    storageBucket: "",
+    messagingSenderId: "492662587984"
+  };
+  firebase.initializeApp(config);
 
-//   var database = Firebase.database()
+  var database = firebase.database()
 //   Create authentication and user profiles for the database to initialize 2 players
 var numPlayers = 2;
  var game_location = "" //add url for the game
@@ -71,8 +71,8 @@ var wizardImage = $("#wizard").attr("src")
 
 var player1Name = "";
 var player2Name = "";
-var player1 = "";
-var player2 = "";
+var player1 = null;
+var player2 = null;
 
 var fighterArray =[
     // Druid
@@ -154,42 +154,56 @@ var fighterArray =[
 ];
 
 $("#readyPlayer1").on("click", function(){
-    if (player1Name == ""){
+    if (player1Name == "" && $("#player1Name").val().trim() !== ""){
      player1Name = ($("#player1Name").val().trim()) ;
-        $("#setPlayerName1").text(player1Name);
+        // $("#setPlayerName1").text(player1Name);
         $("#player1Name").val("")
          }
     else{
         $("#player1Name").val("")
     }
-
+    database.ref().child("/players/player1/player1Name").set(player1Name);
+    database.ref("/players/player1").onDisconnect().remove();
 })
 $("#readyPlayer2").on("click", function(){
-    if (player2Name == ""){
+    if (player2Name == "" && $("#player2Name").val().trim() !==""){
         player2Name = $("#player2Name").val().trim();
-        $("#setPlayerName2").text(player2Name);
+        // $("#setPlayerName2").text(player2Name);
         $("#player2Name").val("")
 
     }
     else {
         $("#player2Name").val("")
     }
-
+    database.ref().child("/players/player2/player2Name").set(player2Name);
+    database.ref("/players/player2").onDisconnect().remove();
 })
+database.ref("/players/").on("value", function(snapshot) {
+	// Check for existence of player 1 in the database
+	if (snapshot.child("player1").exists()) {
+        $("#setPlayerName1").text(player1Name);
+    }
+    if (snapshot.child("player2").exists()){
+        $("#setPlayerName2").text(player2Name);
+  
+    }
+});
+
 
 function chooseHero1(){
              $("#druid").on("click", function(){
-                if ( player1 == ""){
-                console.log("clicked")
+                if ( player1 == null){
                 player1 = fighterArray[0]
                 $("#assigned-name1").text(player1Name)
-                console.log(player1)
+                database.ref().child("players/player1/champion1").set(player1)
                 }
             })
            $("#assassin").on("click", function(){
-                if ( player1 == ""){
+                if ( player1 == null){
                player1 = fighterArray[1];
                $("#assigned-name2").text(player1Name)
+               database.ref().child("players/player1/champion1").set(player1)
+
             }
            })
         }
@@ -197,17 +211,19 @@ chooseHero1();
 
 function chooseHero2(){
              $("#warrior").on("click", function(){
-                if ( player2 == ""){
-                console.log("clicked")
+                if ( player2 == null){
                 player2 = fighterArray[2]
                 $("#assigned-name3").text(player2Name)
-                console.log(player2)
+                database.ref().child("players/player2/champion2").set(player2)
+
                 }
             })
            $("#wizard").on("click", function(){
-                if ( player2 == ""){
+                if ( player2 == null){
                player2 = fighterArray[3];
                $("#assigned-name4").text(player2Name)
+               database.ref().child("players/player2/champion2").set(player2)
+
             }
            })
         }
@@ -354,6 +370,12 @@ function restartGame (){
     $("#assigned-name4").text("");
     $("#setPlayerName1").text("");
     $("#setPlayerName2").text("");
+    database.ref().set({
+        Player1Name: "",
+        Player2Name: "",
+        Player1: "",
+        Player2: "",
+    })
 
 }
 
@@ -361,8 +383,23 @@ $("#reStart").on("click", function(){
     restartGame();
 })
 
+// removeondisconnect() is a function to look into, it empties player data after leaving the page
 
+$("#chat-send").on("click", function(event) {
+	event.preventDefault();
 
+	// First, make sure that the player exists and the message box is non-empty
+	if ( (yourPlayerName !== "") && ($("#chat-input").val().trim() !== "") ) {
+		// Grab the message from the input box and subsequently reset the input box
+		var msg = yourPlayerName + ": " + $("#chat-input").val().trim();
+		$("#chat-input").val("");
 
+		// Get a key for the new chat entry
+		var chatKey = database.ref().child("/chat/").push().key;
+
+		// Save the new chat entry
+		database.ref("/chat/" + chatKey).set(msg);
+	}
+});
 
 
