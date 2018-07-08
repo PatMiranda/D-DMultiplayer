@@ -403,8 +403,8 @@ function restartGame (){
     $("#wonGame").css("display", "none");
      player1Name = "";
      player2Name = "";
-     player1 = "";
-     player2 = "";
+     player1 = null;
+     player2 = null;
     $("#initialInstruct").css("display", "block");
     $("#assigned-name1").text("");
     $("#assigned-name2").text("");
