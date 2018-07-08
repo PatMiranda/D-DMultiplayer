@@ -69,8 +69,8 @@ var assassinImage =  $("#assassin").attr("src")
 var fighterImage = $("#warrior").attr("src")
 var wizardImage = $("#wizard").attr("src")
 
-var player1Name = "";
-var player2Name = "";
+var player1Name = null;
+var player2Name = null;
 var player1 = null;
 var player2 = null;
 
@@ -154,7 +154,7 @@ var fighterArray =[
 ];
 
 $("#readyPlayer1").on("click", function(){
-    if (player1Name == "" && $("#player1Name").val().trim() !== ""){
+    if (player1Name == null && $("#player1Name").val().trim() !== ""){
      player1Name = ($("#player1Name").val().trim()) ;
         // $("#setPlayerName1").text(player1Name);
         $("#player1Name").val("")
@@ -169,7 +169,7 @@ $("#readyPlayer1").on("click", function(){
     })
 })
 $("#readyPlayer2").on("click", function(){
-    if (player2Name == "" && $("#player2Name").val().trim() !==""){
+    if (player2Name == null && $("#player2Name").val().trim() !==""){
         player2Name = $("#player2Name").val().trim();
         // $("#setPlayerName2").text(player2Name);
         $("#player2Name").val("")
@@ -401,8 +401,8 @@ function checkEndGame (){
 
 function restartGame (){
     $("#wonGame").css("display", "none");
-     player1Name = "";
-     player2Name = "";
+     player1Name = null;
+     player2Name = null;
      player1 = null;
      player2 = null;
     $("#initialInstruct").css("display", "block");
