@@ -84,12 +84,12 @@ var fighterArray =[
              {
                 name : "Branch of Yggdrisil",
                 attack : playerRoll + 7,
-                val : "2xD20 + 7"
+                val : "D20 + 7"
             },
              {
                 name : "Bound Earth",
                 attack : (playerRoll * 3) + 10,
-                val : "(2xD20x3)+10",
+                val : "(D20x3)+10",
                 uses : 1
             }
         ]
@@ -102,13 +102,13 @@ var fighterArray =[
         weapons : [
             {name : "Scimitar",
              attack : playerRoll + 10,
-            val : "2xD20 + 10"
+            val : "D20 + 10"
             },
             {
         uses : 3,
         name : "Dark Bow",
         attack : playerRoll * 2,
-        val : "2xD20x2"
+        val : "D20x2"
              }
             ]
        
@@ -121,7 +121,7 @@ var fighterArray =[
         weapons : [
             {name: "Cold Claw",
             attack: playerRoll + 16,
-            val : "2xD20 + 16" 
+            val : "D20 + 16" 
         }
         ]
     },   
@@ -135,18 +135,18 @@ var fighterArray =[
             { name : "Dark Bolt",
             attack : playerRoll + 20,
             uses: 4, 
-            val : "2xD20 + 20"
+            val : "D20 + 20"
         },
         {
             name: "Soul Drain",
             attack: playerRoll * 3,
             uses: 2, 
-            val : "2xD20 x 3"
+            val : "D20 x 3"
         },
          {
             name: "Staff Strike",
             attack: playerRoll,
-            val : "2xD20"
+            val : "D20"
         },
         ]
            
@@ -164,6 +164,9 @@ $("#readyPlayer1").on("click", function(){
     }
     database.ref().child("/players/player1/player1Name").set(player1Name);
     database.ref("/players/player1").onDisconnect().remove();
+    database.ref('/players/player1/champion1/').on('value', function(snapshot) {
+        snapshot.hp;
+    })
 })
 $("#readyPlayer2").on("click", function(){
     if (player2Name == "" && $("#player2Name").val().trim() !==""){
@@ -178,17 +181,23 @@ $("#readyPlayer2").on("click", function(){
     database.ref().child("/players/player2/player2Name").set(player2Name);
     database.ref("/players/player2").onDisconnect().remove();
 })
+
+// this prints the names below the submit bar once they are logged in firebase
+
 database.ref("/players/").on("value", function(snapshot) {
 	// Check for existence of player 1 in the database
 	if (snapshot.child("player1").exists()) {
         $("#setPlayerName1").text(player1Name);
+        // player1Name = snapshot.child("/player1Name/")
     }
     if (snapshot.child("player2").exists()){
         $("#setPlayerName2").text(player2Name);
   
     }
 });
-
+var player1Image = database.ref('/players/player1/champion1/').on('value', function(snapshot) {
+    snapshot.hp;
+})
 
 function chooseHero1(){
              $("#druid").on("click", function(){
@@ -196,6 +205,7 @@ function chooseHero1(){
                 player1 = fighterArray[0]
                 $("#assigned-name1").text(player1Name)
                 database.ref().child("players/player1/champion1").set(player1)
+                console.log(player1Image)
                 }
             })
            $("#assassin").on("click", function(){
@@ -206,6 +216,9 @@ function chooseHero1(){
 
             }
            })
+           
+        
+         
         }
 chooseHero1();
 
@@ -229,9 +242,35 @@ function chooseHero2(){
         }
 chooseHero2();
 
+
+database.ref().on("child_added", function(snapshot) {
+    value = snapshot.val().player1.player1Name
+   
+     test(value)
+ })
+ 
+
+
+function test(){
+    console.log("this is the player image " + value)
+}
+// var player1Image = database.ref().snapshot.val().players.player1.champion1.image;
+// var player1Name = snapshot.val().players.player1.player1Name;
+// var player1Class = snapshot.val().players.player1.champion1.fighterClass;
+// var player1Hp = snapshot.val().players.player1.champion1.hp;
+// var player1Ac = snapshot.val().players.player1.champion1.ac;
+
+// var secondPlayerImage = snapshot.val().players.player2.champion2.image;
+// var secondPlayerName = snapshot.val().players.player2.player2Name;
+// var secondPlayerClass = snapshot.val().players.player2.champion2.fighterClass;
+// var secondPlayerHp = snapshot.val().players.player2.champion2.hp;
+// var secondPlayerAc = snapshot.val().players.player2.champion2.ac;
+
+
+
 $("#start-button").on("click", function (){
     
-        if( player1 !== "" && player2 !== ""){
+        if( player1 !== null && player2 !== null){
             $("#initialInstruct").css("display", "none");
             $("#Game").css("display", "block");
             playerCard1();
@@ -241,7 +280,9 @@ $("#start-button").on("click", function (){
         
     }
 })
+
 function playerCard1 (){
+    // player1 = database.ref().child("/players/player1/champion1/");
     $("#player1Image").attr("src", player1.image);
     $("#p1Name").text("Name: " + player1Name);
     $("#p1Class").text("Class: " + player1.fighterClass);
@@ -255,6 +296,7 @@ function playerCard1 (){
     
 }
 function playerCard2 (){
+    // player2 = database.ref().child("players/player1/champion2");
     $("#player2Image").attr("src", player2.image);
     $("#p2Name").text("Name: " + player2Name);
     $("#p2Class").text("Class: " + player2.fighterClass);
@@ -370,12 +412,14 @@ function restartGame (){
     $("#assigned-name4").text("");
     $("#setPlayerName1").text("");
     $("#setPlayerName2").text("");
-    database.ref().set({
-        Player1Name: "",
-        Player2Name: "",
-        Player1: "",
-        Player2: "",
-    })
+    database.ref("/players/").remove();
+
+    // database.ref().set({
+    //     Player1Name: "",
+    //     Player2Name: "",
+    //     Player1: "",
+    //     Player2: "",
+    // })
 
 }
 
@@ -385,21 +429,36 @@ $("#reStart").on("click", function(){
 
 // removeondisconnect() is a function to look into, it empties player data after leaving the page
 
-$("#chat-send").on("click", function(event) {
-	event.preventDefault();
+// $("#chat-send").on("click", function(event) {
+// 	event.preventDefault();
 
 	// First, make sure that the player exists and the message box is non-empty
-	if ( (yourPlayerName !== "") && ($("#chat-input").val().trim() !== "") ) {
-		// Grab the message from the input box and subsequently reset the input box
-		var msg = yourPlayerName + ": " + $("#chat-input").val().trim();
-		$("#chat-input").val("");
+// 	if ( (player1Name !== "") && ($("#chat-input").val().trim() !== "") ) {
+// 		// Grab the message from the input box and subsequently reset the input box
+// 		var msg = player1Name + ": " + $("#chat-input").val().trim();
+// 		$("#chat-input").val("");
 
-		// Get a key for the new chat entry
-		var chatKey = database.ref().child("/chat/").push().key;
+// 		// Get a key for the new chat entry
+// 		var chatKey = database.ref().child("/chat/").push().key;
 
-		// Save the new chat entry
-		database.ref("/chat/" + chatKey).set(msg);
-	}
-});
+// 		// Save the new chat entry
+// 		database.ref("/chat/" + chatKey).set(msg);
+// 	}
+// });
+// database.ref("/chat/").on("child_added", function(snapshot) {
+// 	var chatMsg = snapshot.val();
+// 	var chatEntry = $("<div>").html(chatMsg);
 
+// 	// Change the color of the chat message depending on user or connect/disconnect event
+// 	if (chatMsg.includes("disconnected")) {
+// 		chatEntry.addClass("chatColorDisconnected");
+// 	} else if (chatMsg.includes("joined")) {
+// 		chatEntry.addClass("chatColorJoined");
+// 	} else if (chatMsg.startsWith(player1Name)) {
+// 		chatEntry.addClass("chatColor1");
+// 	} else {
+// 		chatEntry.addClass("chatColor2");
+// 	}
 
+// 	$("#chatDisplay").append(chatEntry);
+// 	$("#chatDisplay").scrollTop($("#chatDisplay")[0].scrollHeight);
