@@ -432,6 +432,8 @@ function restartGame (){
     $("#challenger").css("display", "none");
      player1Name = "";
      player2Name = "";
+     player1.hp = 300;
+     player2.hp = 300;
      player1 = null;
      player2 = null;
     $("#initialInstruct").css("display", "block");
