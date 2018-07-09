@@ -415,7 +415,7 @@ function checkEndGame (){
         $("#currentWinner").text(player2Name);
     }
     if (player2.hp <= 0){
-        player2Wins++;
+        player1Wins++;
         $("#player2Wins").text("Player 2 Victories: " + player2Wins);
         $("#player1Wins").text("Player 1 Victories: " + player1Wins);
         $("#Game").css("display", "none");
