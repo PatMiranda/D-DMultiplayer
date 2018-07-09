@@ -69,7 +69,7 @@ var assassinImage =  $("#assassin").attr("src")
 var fighterImage = $("#warrior").attr("src")
 var wizardImage = $("#wizard").attr("src")
 var sorcererImage = "Assets/Images/sorcerer.jpg";
-var necromancerImage = "Assets/Images/sorcerer.jpg";
+var necromancerImage = "Assets/Images/necromancer.jpg";
 var werewolfImage = "Assets/Images/werewolf.jpg";
 var hellKnightImage = "Assets/Images/hellknight.jpg";
 
