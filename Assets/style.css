@@ -190,3 +190,9 @@ h3 {
     border-color: gold;
     display: none;
 }
+#setup {
+    font-size: 15px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: whitesmoke;
+}

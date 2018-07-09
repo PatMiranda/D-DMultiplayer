@@ -68,6 +68,10 @@ var druidImage = "Assets/Images/druid.jpg"
 var assassinImage =  $("#assassin").attr("src")
 var fighterImage = $("#warrior").attr("src")
 var wizardImage = $("#wizard").attr("src")
+var sorcererImage = "Assets/Images/sorcerer.jpg";
+var necromancerImage = "Assets/Images/sorcerer.jpg";
+var werewolfImage = "Assets/Images/werewolf.jpg";
+var hellKnightImage = "Assets/Images/hellknight.jpg";
 
 var player1Name = "";
 var player2Name = "";
@@ -150,7 +154,93 @@ var fighterArray =[
         },
         ]
            
-    }
+    },
+    //Sorcerer
+    {   fighterClass : "Sorcerer",
+        image : sorcererImage ,
+        hp : 375,
+        ac : 4, 
+        weapons : [
+            { name : "Internal Bleed",
+            attack : playerRoll + 20,
+            uses: 4, 
+            val : "D20 + 20"
+        },
+        {
+            name: "Curse",
+            attack: playerRoll * 3,
+            uses: 2, 
+            val : "D20 x 3"
+        },
+         {
+            name: "Black Blade",
+            attack: playerRoll + 7,
+            val : "D20+7"
+        },
+    ]},
+    //Necromancer
+    {   fighterClass : "Necromancer",
+        image : necromancerImage ,
+        hp : 450,
+        ac : 4, 
+        weapons : [
+            { name : "Black Flame",
+            attack : playerRoll + 20,
+            uses: 4, 
+            val : "D20 + 20"
+        },
+        {
+            name: "Undead Reach",
+            attack: playerRoll * 3,
+            uses: 2, 
+            val : "D20 x 3"
+        },
+        ]
+    
+           
+    },
+    //HellKnight
+    {   fighterClass : "Hell-Knight",
+        image : hellKnightImage ,
+        hp : 450,
+        ac : 6, 
+        weapons : [
+            { name : "Dark Sword",
+            attack : playerRoll + 20,
+            uses: 4, 
+            val : "D20 + 20"
+        },
+        {
+            name: "Writhing Flame",
+            attack: playerRoll * 3,
+            uses: 2, 
+            val : "D20 x 3"
+        },
+        ]
+    
+           
+    },
+    //Werewolf
+    {   fighterClass : "Werewolf",
+        image : werewolfImage ,
+        hp : 400,
+        ac : 4, 
+        weapons : [
+            { name : "Gnash",
+            attack : playerRoll + 27,
+            uses: 4, 
+            val : "D20 + 27"
+        },
+        {
+            name: "Mawl",
+            attack: playerRoll * 3,
+            uses: 2, 
+            val : "D20 x 3"
+        },
+        ]
+    
+           
+    },
 ];
 
 $("#readyPlayer1").on("click", function(){
@@ -238,7 +328,7 @@ chooseHero1();
 function chooseHero2(){
                 $("#druid2").on("click", function(){
                     if ( player2 == null){
-                    player2 = fighterArray[0]
+                    player2 = fighterArray[4]
                     $("#assigned-name12").text(player2Name)
                     database.ref().child("players/player2/champion2").set(player2)
                     console.log(player1Image)
@@ -247,7 +337,7 @@ function chooseHero2(){
                 })
             $("#assassin2").on("click", function(){
                     if ( player2 == null){
-                player2 = fighterArray[1];
+                player2 = fighterArray[5];
                 $("#assigned-name22").text(player2Name)
                 database.ref().child("players/player2/champion2").set(player2)
                 makeStart();
@@ -255,7 +345,7 @@ function chooseHero2(){
             })
              $("#warrior2").on("click", function(){
                 if ( player2 == null){
-                player2 = fighterArray[2]
+                player2 = fighterArray[6]
                 $("#assigned-name32").text(player2Name)
                 database.ref().child("players/player2/champion2").set(player2)
                 makeStart();
@@ -263,7 +353,7 @@ function chooseHero2(){
             })
            $("#wizard2").on("click", function(){
                 if ( player2 == null){
-               player2 = fighterArray[3];
+               player2 = fighterArray[7];
                $("#assigned-name42").text(player2Name)
                database.ref().child("players/player2/champion2").set(player2)
                makeStart();            
