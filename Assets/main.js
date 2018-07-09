@@ -274,7 +274,7 @@ function chooseHero2(){
 chooseHero2();
 
 function makeStart (){
-    
+        $("#challenger").css("display", "block")
         $("#start-button").css("display", "block")
    
 }
@@ -429,6 +429,7 @@ function checkEndGame (){
 function restartGame (){
     $("#wonGame").css("display", "none");
     $("#start-button").css("display", "none");
+    $("#challenger").css("display", "none");
      player1Name = "";
      player2Name = "";
      player1 = null;
