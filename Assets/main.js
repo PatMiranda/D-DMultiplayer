@@ -205,7 +205,7 @@ var fighterArray =[
         hp : 450,
         ac : 6, 
         weapons : [
-            { name : "Dark Sword",
+            { name : "Demon Tail Axe",
             attack : playerRoll + 20,
             uses: 4, 
             val : "D20 + 20"
@@ -296,6 +296,7 @@ function chooseHero1(){
                 $("#assigned-name1").text(player1Name)
                 database.ref().child("players/player1/champion1").set(player1)
                 console.log(player1Image)
+                makeStart();
                 }
             })
            $("#assassin").on("click", function(){
@@ -303,7 +304,7 @@ function chooseHero1(){
                player1 = fighterArray[1];
                $("#assigned-name2").text(player1Name)
                database.ref().child("players/player1/champion1").set(player1)
-
+               makeStart();
             }
            })
            $("#warrior").on("click", function(){
@@ -311,7 +312,7 @@ function chooseHero1(){
             player1 = fighterArray[2]
             $("#assigned-name3").text(player1Name)
             database.ref().child("players/player1/champion1").set(player1)
-
+            makeStart();
             }
         })
        $("#wizard").on("click", function(){
@@ -319,6 +320,7 @@ function chooseHero1(){
            player1 = fighterArray[3];
            $("#assigned-name4").text(player1Name)
            database.ref().child("players/player1/champion1").set(player1)
+           makeStart();
         }
        })
          
@@ -364,8 +366,11 @@ function chooseHero2(){
 chooseHero2();
 
 function makeStart (){
+    if (player1 !== null && player2 !== null){
         $("#challenger").css("display", "block")
-        $("#start-button").css("display", "block")
+        $("#start-button").css("display", "block") 
+    }
+        
    
 }
 
