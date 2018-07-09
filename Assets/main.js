@@ -69,8 +69,8 @@ var assassinImage =  $("#assassin").attr("src")
 var fighterImage = $("#warrior").attr("src")
 var wizardImage = $("#wizard").attr("src")
 
-var player1Name = null;
-var player2Name = null;
+var player1Name = "";
+var player2Name = "";
 var player1 = null;
 var player2 = null;
 
@@ -154,7 +154,7 @@ var fighterArray =[
 ];
 
 $("#readyPlayer1").on("click", function(){
-    if (player1Name == null && $("#player1Name").val().trim() !== ""){
+    if (player1Name == "" && $("#player1Name").val().trim() !== ""){
      player1Name = ($("#player1Name").val().trim()) ;
         // $("#setPlayerName1").text(player1Name);
         $("#player1Name").val("")
@@ -169,7 +169,7 @@ $("#readyPlayer1").on("click", function(){
     })
 })
 $("#readyPlayer2").on("click", function(){
-    if (player2Name == null && $("#player2Name").val().trim() !==""){
+    if (player2Name == "" && $("#player2Name").val().trim() !==""){
         player2Name = $("#player2Name").val().trim();
         // $("#setPlayerName2").text(player2Name);
         $("#player2Name").val("")
@@ -216,44 +216,80 @@ function chooseHero1(){
 
             }
            })
-           
-        
+           $("#warrior").on("click", function(){
+            if ( player1 == null){
+            player1 = fighterArray[2]
+            $("#assigned-name3").text(player1Name)
+            database.ref().child("players/player1/champion1").set(player1)
+
+            }
+        })
+       $("#wizard").on("click", function(){
+            if ( player1 == null){
+           player1 = fighterArray[3];
+           $("#assigned-name4").text(player1Name)
+           database.ref().child("players/player1/champion1").set(player1)
+        }
+       })
          
         }
 chooseHero1();
 
 function chooseHero2(){
-             $("#warrior").on("click", function(){
-                if ( player2 == null){
-                player2 = fighterArray[2]
-                $("#assigned-name3").text(player2Name)
+                $("#druid2").on("click", function(){
+                    if ( player2 == null){
+                    player2 = fighterArray[0]
+                    $("#assigned-name12").text(player2Name)
+                    database.ref().child("players/player2/champion2").set(player2)
+                    console.log(player1Image)
+                    makeStart();
+                    }
+                })
+            $("#assassin2").on("click", function(){
+                    if ( player2 == null){
+                player2 = fighterArray[1];
+                $("#assigned-name22").text(player2Name)
                 database.ref().child("players/player2/champion2").set(player2)
-
+                makeStart();
                 }
             })
-           $("#wizard").on("click", function(){
+             $("#warrior2").on("click", function(){
+                if ( player2 == null){
+                player2 = fighterArray[2]
+                $("#assigned-name32").text(player2Name)
+                database.ref().child("players/player2/champion2").set(player2)
+                makeStart();
+                }
+            })
+           $("#wizard2").on("click", function(){
                 if ( player2 == null){
                player2 = fighterArray[3];
-               $("#assigned-name4").text(player2Name)
+               $("#assigned-name42").text(player2Name)
                database.ref().child("players/player2/champion2").set(player2)
-
+               makeStart();            
             }
            })
+           
         }
 chooseHero2();
 
-
-database.ref().on("child_added", function(snapshot) {
-    value = snapshot.val().player1.player1Name
+function makeStart (){
+    
+        $("#start-button").css("display", "block")
    
-     test(value)
- })
+}
+
+// database.ref().on("child_added", function(snapshot) {
+//     value = snapshot.val().player1.player1Name
+   
+//      test(value)
+//  })
  
 
 
-function test(){
-    console.log("this is the player image " + value)
-}
+// function test(){
+//     console.log("this is the player image " + value)
+// }
 // var player1Image = database.ref().snapshot.val().players.player1.champion1.image;
 // var player1Name = snapshot.val().players.player1.player1Name;
 // var player1Class = snapshot.val().players.player1.champion1.fighterClass;
@@ -363,27 +399,15 @@ function player2Attack(){
 player1Attack();
 player2Attack();
 
-//   function turnOrder (){
-//       if (player1Turn = true){
-//           player1Attack();
-//           var turnText1 =  $("<h3>")
-//           turnText1.text("Your Turn")
-//           $("#player1Buttons").append(turnText1)
-//       }
-//       else if (player2Turn = true){
-//           player2Attack();
-//           var turnText2 = $("<h3>")
-//           turnText2.text("Your Turn")
-//           turnText1.text("")
-//           $("#player2Buttons").append(turnText2)
-//       }
-//   }      
-
-//   turnOrder();
 currentWinner= "";
 
+var player1Wins = 0;
+var player2Wins = 0;
 function checkEndGame (){
     if (player1.hp <= 0){
+        player2Wins++;
+        $("#player2Wins").text("Player 2 Victories: " + player2Wins);
+        $("#player1Wins").text("Player 1 Victories: " + player1Wins);
         $("#Game").css("display", "none");
         $("#wonGame").css("display", "block");
         currentWinner = player2;
@@ -391,6 +415,9 @@ function checkEndGame (){
         $("#currentWinner").text(player2Name);
     }
     if (player2.hp <= 0){
+        player2Wins++;
+        $("#player2Wins").text("Player 2 Victories: " + player2Wins);
+        $("#player1Wins").text("Player 1 Victories: " + player1Wins);
         $("#Game").css("display", "none");
         $("#wonGame").css("display", "block");
         currentWinner = player1;
@@ -401,8 +428,9 @@ function checkEndGame (){
 
 function restartGame (){
     $("#wonGame").css("display", "none");
-     player1Name = null;
-     player2Name = null;
+    $("#start-button").css("display", "none");
+     player1Name = "";
+     player2Name = "";
      player1 = null;
      player2 = null;
     $("#initialInstruct").css("display", "block");
@@ -410,16 +438,14 @@ function restartGame (){
     $("#assigned-name2").text("");
     $("#assigned-name3").text("");
     $("#assigned-name4").text("");
+    $("#assigned-name12").text("");
+    $("#assigned-name22").text("");
+    $("#assigned-name32").text("");
+    $("#assigned-name42").text("");
     $("#setPlayerName1").text("");
     $("#setPlayerName2").text("");
     database.ref("/players/").remove();
 
-    // database.ref().set({
-    //     Player1Name: "",
-    //     Player2Name: "",
-    //     Player1: "",
-    //     Player2: "",
-    // })
 
 }
 

@@ -39,6 +39,15 @@
     
 
     <div class="container" id="initialInstruct">
+        <div class="row">
+            <div class="col-md-6">
+                <label id="player1Wins"></label>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                    <label id="player2Wins"></label>
+            </div>
+        </div>
         <div class="row" class="firstRound">
             <div class="col-md-lg">
                 <h2>1.Enter Your Name</h2>
@@ -51,7 +60,8 @@
                 <button class="btn btn-small btn-dark" id="readyPlayer1">Submit</button><br/>
                 <span id="setPlayerName1"></span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
                 <label id="playerRed">Player 2 Name</label>
                 <input type="name" id="player2Name"><br/>
                 <button class="btn btn-small btn-dark" id="readyPlayer2">Submit</button><br/>
@@ -64,30 +74,54 @@
             </div>
         </div>
         <div class="row" id="fighterLineup">
-            <div class="col-md-3 fighters1">
-                    <img class="warImage" id="druid" src="Assets/Images/druid.jpg"><br/>
-                    <span id="assigned-name1"></span>
-            </div>
-            <div class="col-md-3 fighters2">
-                    <img class="warImage"  id="assassin" src="Assets/Images/assassin2.jpg"><br/>
-                    <span id="assigned-name2"></span>
-            </div>
-            <div class="col-md-3 fighters3">
-                    <img class="warImage" id="warrior" src="Assets/Images/warrior.jpg"><br/>
-                    <span id="assigned-name3"></span>
-            </div>
-            <div class="col-md-3 fighters4">
-                    <img class="warImage" id="wizard" src="Assets/Images/wizard.jpg"><br/>
-                    <span id="assigned-name4"></span>
-            </div>
+            
+                    <div class="col-sm-2 fighters">
+                            <img class="warImage" id="druid" src="Assets/Images/druid.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name1"></span>
+                    </div>
+                    <div class="col-sm-2 fighters">
+                            <img class="warImage"  id="assassin" src="Assets/Images/assassin2.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name2"></span>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-sm-3">
+                        <img id="sword" src="Assets/Images/sword.png">
+                    </div>
+                    <div class="col-sm-2 fighters2">
+                            <img class="warImage" id="druid2" src="Assets/Images/druid.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name12"></span>
+                    </div>
+                    <div class="col-sm-2 fighters2">
+                            <img class="warImage"  id="assassin2" src="Assets/Images/assassin2.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name22"></span>
+                    </div>
         </div>
-    <div class="row">
-            <div class="col-md-3" >
-                <button class="btn btn-lg btn-primary" id="start-button">Start Game</button>
-            </div>
+        <div class="row">
+                    <div class="col-sm-2 fighters">
+                            <img class="warImage" id="warrior" src="Assets/Images/warrior.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name3"></span>
+                    </div>
+                    <div class="col-sm-2 fighters">
+                            <img class="warImage" id="wizard" src="Assets/Images/wizard.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name4"></span>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
+                            <button class="btn btn-lg btn-primary" id="start-button" style="display: none">Start Game</button>
+
+                    </div>
+                    <div class="col-sm-2 fighters2">
+                            <img class="warImage" id="warrior2" src="Assets/Images/warrior.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name32"></span>
+                    </div>
+                    <div class="col-sm-2 fighters2">
+                            <img class="warImage" id="wizard2" src="Assets/Images/wizard.jpg"><br/>
+                            <label>Name:</label><span id="assigned-name42"></span>
+                    </div>
+            
+            
         </div>
     </div>
-
     <div class="container" id="Game" style="display: none">
         <div class="row">
             <div class="col-md-12">

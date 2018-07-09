@@ -25,7 +25,7 @@ h1 {
     border-color: white;
 }
 .warImage {
-    width: 200px;
+    height: 200px;
 }
 label {
     font-size: 20px;
@@ -50,7 +50,7 @@ h2 {
     font-size: 20px;
 
 }
-.fighters1 {
+.fighters {
     border-style: solid;
     border-width: 5px;
     border-color: green;
@@ -59,21 +59,10 @@ h2 {
 .fighters2 {
     border-style: solid;
     border-width: 5px;
-    border-color: green;
-    background-color: black;
-}
-.fighters3 {
-    border-style: solid;
-    border-width: 5px;
     border-color: red;
     background-color: black;
 }
-.fighters4 {
-    border-style: solid;
-    border-width: 2px;
-    border-color: red;
-    background-color: black;
-}
+
 #assigned-name1 {
     font-size: 20px;
     color: green;
@@ -86,10 +75,30 @@ h2 {
 }
 #assigned-name3 {
     font-size: 20px;
-    color: red;
+    color: green;
     font-family: 'Metamorphous', cursive;
 }
 #assigned-name4 {
+    font-size: 20px;
+    color: green;
+    font-family: 'Metamorphous', cursive;
+}
+#assigned-name12 {
+    font-size: 20px;
+    color: red;
+    font-family: 'Metamorphous', cursive;
+}
+#assigned-name22 {
+    font-size: 20px;
+    color: red;
+    font-family: 'Metamorphous', cursive;
+}
+#assigned-name32 {
+    font-size: 20px;
+    color: red;
+    font-family: 'Metamorphous', cursive;
+}
+#assigned-name42 {
     font-size: 20px;
     color: red;
     font-family: 'Metamorphous', cursive;
@@ -162,4 +171,13 @@ h3 {
 #chatDisplay {
     font-family: 'Metamorphous', cursive;
 
+}
+#player1Wins {
+    color: green;
+}
+#player2Wins {
+    color: red;
+}
+#sword {
+    height: 200px;
 }
