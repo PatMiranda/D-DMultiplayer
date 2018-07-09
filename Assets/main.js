@@ -520,6 +520,7 @@ function restartGame (){
     $("#wonGame").css("display", "none");
     $("#start-button").css("display", "none");
     $("#challenger").css("display", "none");
+    $("#restartGame").css("display", "block")
      player1Name = "";
      player2Name = "";
      player1.hp = 300;
