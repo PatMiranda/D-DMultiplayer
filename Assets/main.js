@@ -543,6 +543,7 @@ function restartGame (){
     $("#assigned-name42").text("");
     $("#setPlayerName1").text("");
     $("#setPlayerName2").text("");
+    $("#player2Name").val("")
     database.ref("/players/").remove();
 
 
