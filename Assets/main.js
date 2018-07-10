@@ -65,7 +65,7 @@ var playerRoll = Math.floor((Math.random()*20)+1);
 
 
 var druidImage = "Assets/Images/druid.jpg"
-var assassinImage =  $("#assassin").attr("src")
+var assassinImage =  "Assets/Images/assassin.jpg"
 var fighterImage = $("#warrior").attr("src")
 var wizardImage = $("#wizard").attr("src")
 var sorcererImage = "Assets/Images/sorcerer.jpg";
@@ -543,7 +543,7 @@ function restartGame (){
     $("#assigned-name42").text("");
     $("#setPlayerName1").text("");
     $("#setPlayerName2").text("");
-    $("#player2Name").val("")
+    // $("#player2Name").val("")
     database.ref("/players/").remove();
 
 
