@@ -472,7 +472,8 @@ function player1Attack(){
         // playerRoll =  Math.floor((Math.random()*20)+1);
         var damage =  $(this).attr("attackpower") - player2.ac
         player2.hp = player2.hp - damage
-        console.log("new hp is " + player2.hp)
+                database.ref().child("players/player2/champion2/hp").set(player2.hp)
+
         player1Turn = false;
         player2Turn = true;
         playerCard2();
@@ -484,7 +485,7 @@ function player2Attack(){
         // playerRoll =  Math.floor((Math.random()*20)+1);
         var damage =  $(this).attr("attackpower") - player1.ac
         player1.hp = player1.hp - damage
-        console.log("player1 hp is " + player1.hp)
+        database.ref().child("players/player1/champion1/hp").set(player1.hp)
         player1Turn = true;
         player2Turn = false;
         playerCard1(); 
